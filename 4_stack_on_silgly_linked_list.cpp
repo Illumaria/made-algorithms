@@ -6,22 +6,23 @@
 
 class LinkedList {
     struct Node {
-        Node(const int64_t& x, Node *head): value(x), next(head) {}
+        Node(const int64_t& x, Node* head): value(x),
+                                            next(head) {}
 
         ~Node() {}
 
         int64_t value;
-        Node *next;
+        Node* next;
     };
 
  public:
     LinkedList(): head(nullptr), size(0) {}
 
     ~LinkedList() {
-        Node *current = head;
+        Node* current = head;
 
         while (current != nullptr) {
-            Node *nodeToDelete = current;
+            Node* nodeToDelete = current;
             current = current->next;
             delete nodeToDelete;
         }
@@ -29,7 +30,7 @@ class LinkedList {
 
     // Add new element to the start of LinkedList:
     void push(int64_t value) {
-        Node *new_node = new Node(value, head);
+        Node* new_node = new Node(value, head);
         head = new_node;
         ++size;
     }
@@ -37,7 +38,7 @@ class LinkedList {
     // Remove the first element of the LinkedList:
     void pop() {
         if (size > 0) {
-            Node *current = head;
+            Node* current = head;
             head = head->next;
             delete current;
             --size;
@@ -52,7 +53,7 @@ class LinkedList {
     }
 
  private:
-    Node *head;
+    Node* head;
     size_t size;
 };
 

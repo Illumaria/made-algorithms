@@ -12,7 +12,7 @@ class DynamicArray {
     // Increase capacity of the DynamicArray:
     void increaseCapacity() {
         capacity *= 2;
-        int64_t *newValues = new int64_t[capacity];
+        int64_t* newValues = new int64_t[capacity];
         for (size_t i = 0; i < size; ++i)
             newValues[i] = values[i];
         delete[] values;
@@ -22,7 +22,7 @@ class DynamicArray {
     // Decrease capacity of the DynamicArray:
     void decreaseCapacity() {
         capacity /= 2;
-        int64_t *newValues = new int64_t[capacity];
+        int64_t* newValues = new int64_t[capacity];
         for (size_t i = 0; i < size; ++i)
             newValues[i] = values[i];
         delete[] values;
@@ -58,7 +58,7 @@ class DynamicArray {
 
  private:
     size_t capacity, size;
-    int64_t *values;
+    int64_t* values;
 };
 
 
