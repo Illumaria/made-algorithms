@@ -1,22 +1,19 @@
 #include <bits/stdc++.h>
 
 
-void dfs(const std::map<std::string, std::vector<std::string>>& graph,
+void dfs(std::map<std::string, std::vector<std::string>>& graph,
          const std::string& from,
          std::map<std::string, bool>& used,
          uint16_t& max_depth,
          uint16_t cur_depth = 1) {
     used[from] = true;
 
-    if (max_depth < cur_depth)
-        max_depth = cur_depth;
+    max_depth = std::max(max_depth, cur_depth);
+    ++cur_depth;
 
-    if (graph.find(from) != graph.end()) {
-        ++cur_depth;
-        for (const auto& to : graph.at(from))
-            if (used[to] == 0)
-                dfs(graph, to, used, max_depth, cur_depth);
-    }
+    for (const auto& to : graph[from])
+        if (!used[to])
+            dfs(graph, to, used, max_depth, cur_depth);
 }
 
 
