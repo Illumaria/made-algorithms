@@ -4,6 +4,9 @@
 struct Vertex {
     int16_t x;
     int16_t y;
+
+    Vertex() {}
+    Vertex(const int16_t x, const int16_t y) : x(x), y(y) {}
 };
 
 
@@ -16,18 +19,25 @@ using VectorVertex = std::vector<Vertex>;
 using MatrixVertex = std::vector<VectorVertex>;
 
 
-VectorVertex build_edges(const int16_t n,
-                         const Vertex& v) {
-    VectorVertex result;
-    if (v.x >= 2 && v.y >= 1) result.push_back({v.x - 2, v.y - 1});
-    if (v.x >= 2 && v.y <= n - 2) result.push_back({v.x - 2, v.y + 1});
-    if (v.x >= 1 && v.y >= 2) result.push_back({v.x - 1, v.y - 2});
-    if (v.x >= 1 && v.y <= n - 3) result.push_back({v.x - 1, v.y + 2});
+const std::vector<Vertex> moves = {
+    Vertex(-2, -1),
+    Vertex(-2, 1),
+    Vertex(-1, -2),
+    Vertex(-1, 2),
+    Vertex(1, -2),
+    Vertex(1, 2),
+    Vertex(2, -1),
+    Vertex(2, 1)
+};
 
-    if (v.x <= n - 3 && v.y >= 1) result.push_back({v.x + 2, v.y - 1});
-    if (v.x <= n - 3 && v.y <= n - 2) result.push_back({v.x + 2, v.y + 1});
-    if (v.x <= n - 2 && v.y >= 2) result.push_back({v.x + 1, v.y - 2});
-    if (v.x <= n - 2 && v.y <= n - 3) result.push_back({v.x + 1, v.y + 2});
+
+VectorVertex build_edges(const int16_t board_size, const Vertex& v) {
+    VectorVertex result;
+
+    for (const auto& move : moves)
+        if (-1 < v.x + move.x && v.x + move.x < board_size &&
+            -1 < v.y + move.y && v.y + move.y < board_size)
+            result.emplace_back(v.x + move.x, v.y + move.y);
 
     return result;
 }
