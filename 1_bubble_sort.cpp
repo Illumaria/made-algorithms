@@ -17,19 +17,21 @@ void optimized_bubble_sort(std::vector<T>& v) {
 }
 
 int main() {
+  std::iostream::sync_with_stdio(false);
+  std::cin.tie(nullptr);
+
   uint16_t n;
-  scanf("%hu", &n);
+  std::cin >> n;
 
   // Read values:
   std::vector<int64_t> v(n);
-  for (uint16_t i = 0; i < n; ++i) scanf("%lld", &v[i]);
+  for (size_t i = 0; i < n; ++i) std::cin >> v[i];
 
   // Sort values:
   optimized_bubble_sort(v);
 
   // Print values:
-  for (const auto& x : v) printf("%lld ", x);
-  printf("\n");
+  for (const auto& x : v) std::cout << x << " ";
 
   return 0;
 }
