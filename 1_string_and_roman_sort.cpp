@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 
-uint16_t roman_to_int(const char& c) {
+uint16_t RomanToInt(const char& c) {
   switch (c) {
     case 'I':
       return 1;
@@ -21,11 +21,11 @@ uint16_t roman_to_int(const char& c) {
   }
 }
 
-uint16_t roman_to_int(const std::string& s) {
+uint16_t RomanToInt(const std::string& s) {
   int value = 0, prev_value = 0;
   // Iterate through string characters in reversed order:
   for (auto chr_ptr = s.rbegin(); chr_ptr != s.rend(); ++chr_ptr) {
-    const uint16_t chr_to_int = roman_to_int(*chr_ptr);
+    auto chr_to_int = RomanToInt(*chr_ptr);
     value += chr_to_int < prev_value ? -chr_to_int : chr_to_int;
     prev_value = chr_to_int;
   }
@@ -33,28 +33,29 @@ uint16_t roman_to_int(const std::string& s) {
 }
 
 int main() {
-  uint16_t n;
-  scanf("%hu", &n);
+  std::iostream::sync_with_stdio(false);
+  std::cin.tie(nullptr);
 
-  // Failed to use scanf() for strings (due to segmentation error)
-  // so using the slower std::cin in this solution.
+  uint16_t n;
+  std::cin >> n;
+
   // Read values:
   std::string name, number;
   std::vector<std::pair<std::string, std::string>> v(n);
-  for (uint16_t i = 0; i < n; ++i) {
+  for (size_t i = 0; i < n; ++i) {
     std::cin >> name >> number;
-    v[i] = make_pair(name, number);
+    v[i] = std::make_pair(name, number);
   }
 
   // Sort values:
   std::sort(v.begin(), v.end(), [](auto& left, auto& right) {
     if (left.first == right.first)
-      return roman_to_int(left.second) < roman_to_int(right.second);
+      return RomanToInt(left.second) < RomanToInt(right.second);
     return left.first < right.first;
   });
 
   // Print values:
-  for (const auto& x : v) printf("%s %s\n", x.first.c_str(), x.second.c_str());
+  for (const auto& x : v) std::cout << x.first << " " << x.second << "\n";
 
   return 0;
 }
