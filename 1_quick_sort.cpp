@@ -5,7 +5,7 @@
 // elements with indices from mid_right to right
 // are larger than the pivot.
 template <typename T, typename U>
-std::tuple<U, U> split(std::vector<T>& v, U left, U right, T x) {
+std::tuple<U, U> Split(std::vector<T>& v, U left, U right, T x) {
   U mid_left = left, mid_right = left;
   U k = right;
 
@@ -25,7 +25,7 @@ std::tuple<U, U> split(std::vector<T>& v, U left, U right, T x) {
 }
 
 template <typename T, typename U>
-void _quick_sort(std::vector<T>& v, U left, U right) {
+void QuickSort_(std::vector<T>& v, U left, U right) {
   if (left < right) {
     // Random generator works fine
     // but is very time consuming!
@@ -34,7 +34,7 @@ void _quick_sort(std::vector<T>& v, U left, U right) {
     // std::uniform_int_distribution<U> uniform_dist(left, right);
     // T x = v[uniform_dist(e)];
 
-    // Median of left, mid, and right is used instead.
+    // Median of left, mid, and right is used instead:
     U mid = left + (right - left) / 2;
     if (v[mid] < v[left]) std::swap(v[left], v[mid]);
     if (v[right] < v[left]) std::swap(v[left], v[right]);
@@ -42,34 +42,37 @@ void _quick_sort(std::vector<T>& v, U left, U right) {
     T x = v[right];
 
     U mid_left, mid_right;
-    std::tie(mid_left, mid_right) = split(v, left, right, x);
+    std::tie(mid_left, mid_right) = Split(v, left, right, x);
 
-    _quick_sort(v, left, mid_left);
-    _quick_sort(v, mid_right, right);
+    QuickSort_(v, left, mid_left);
+    QuickSort_(v, mid_right, right);
   }
 }
 
 template <typename T>
-void quick_sort(std::vector<T>& v) {
+void QuickSort(std::vector<T>& v) {
   if (!v.empty()) {
-    _quick_sort(v, (uint32_t)0, (uint32_t)v.size() - 1);
+    QuickSort_(v, static_cast<uint32_t>(0),
+               static_cast<uint32_t>(v.size() - 1));
   }
 }
 
 int main() {
+  std::iostream::sync_with_stdio(false);
+  std::cin.tie(nullptr);
+
   uint32_t n;
-  scanf("%lu", &n);
+  std::cin >> n;
 
   // Read values:
   std::vector<int64_t> v(n);
-  for (uint32_t i = 0; i < n; ++i) scanf("%lld", &v[i]);
+  for (size_t i = 0; i < n; ++i) std::cin >> v[i];
 
   // Sort values:
-  quick_sort(v);
+  QuickSort(v);
 
   // Print values:
-  for (const auto& x : v) printf("%lld ", x);
-  printf("\n");
+  for (const auto& x : v) std::cout << x << " ";
 
   return 0;
 }
