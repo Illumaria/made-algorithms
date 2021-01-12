@@ -1,12 +1,16 @@
 #include <bits/stdc++.h>
 
 int main() {
-  int16_t t, a, b;
-  scanf("%hd", &t);
+  std::iostream::sync_with_stdio(false);
+  std::cin.tie(nullptr);
 
+  int16_t t;
+  std::cin >> t;
+
+  int16_t a, b;
   for (; t > 0; --t) {
-    scanf("%hd %hd", &a, &b);
-    printf("%d\n", a + b);
+    std::cin >> a >> b;
+    std::cout << a + b << "\n";
   }
 
   return 0;
