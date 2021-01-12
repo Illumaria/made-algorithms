@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 
 template <typename T>
-void optimized_bubble_sort(std::vector<T>& v) {
+void OptimizedBubbleSort(std::vector<T>& v) {
   uint16_t v_size = v.size();
   uint16_t i, new_i = 0;
   while (v_size > 1) {
@@ -28,7 +28,7 @@ int main() {
   for (size_t i = 0; i < n; ++i) std::cin >> v[i];
 
   // Sort values:
-  optimized_bubble_sort(v);
+  OptimizedBubbleSort(v);
 
   // Print values:
   for (const auto& x : v) std::cout << x << " ";
