@@ -1,6 +1,6 @@
 #  Sorting
 
-## A. A+B (Trial Problem)
+## 1. A+B (Trial Problem)
 
 Input: standard input
 
@@ -37,7 +37,7 @@ Print _t_ integers — the required numbers _a + b_.
 1110
 ```
 
-## B. Simple sort (O(n^2))
+## 2. Simple sort (O(n^2))
 
 Input: standard input
 
@@ -66,7 +66,7 @@ The sole line of the output should contain the same array but in the non-decreas
 1 1 2 2 3 3 4 6 7 8 
 ```
 
-## C. Merge sort
+## 3. Merge sort
 
 Input: standard input
 
@@ -95,7 +95,7 @@ The sole line of the output should contain the same array but in the non-decreas
 1 1 2 2 3 3 4 6 7 8 
 ```
 
-## D. Number of inversions
+## 4. Number of inversions
 
 Input: standard input
 
@@ -137,7 +137,7 @@ Output one integer — the number of inversions in the given array.
 6
 ```
 
-## E. Quick sort
+## 5. Quick sort
 
 Input: standard input
 
@@ -166,7 +166,7 @@ The sole line of the output should contain the same array but in the non-decreas
 1 1 2 2 3 3 4 6 7 8 
 ```
 
-## F. "King" sort
+## 6. "King" sort
 
 Input: standard input
 
