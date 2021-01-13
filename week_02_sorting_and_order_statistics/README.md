@@ -6,7 +6,7 @@ Input: standard input
 
 Output: standard output
 
-The clone battalion is in formation. All the Imperials stood in a row and counted: first, second, third, ..., _n_-th. Each of them is holding a piece of paper with the result of their IQ test. As you know, the result of IQ testing is a number from 1 to 109.
+The clone battalion is in formation. All the Imperials stood in a row and counted: first, second, third, ..., _n_-th. Each of them is holding a piece of paper with the result of their IQ test. As you know, the result of IQ testing is a number from 1 to 10^9.
 
 Count Duko approaches the battalion from time to time, swings his sword and makes a request: "If all clones from the _i_-th to the _j_-th are ordered according to the test result, then what value will the clone standing on the _k_-th place have?" — and quickly demands an answer, threatening to waste the entire party. Solve the problem and help the clones survive.
 
@@ -18,7 +18,7 @@ The second line contains these _n_ integers separated by spaces. The numbers are
 
 The third line contains an integer _m_ (1 ≤ _m_ ≤ 10^5) — the number of queries.
 
-The rest _m_ lines contain queries in the format "_i j k_". It is guaranteed that the queries are correct, i.e. 1 ≤ _i_ ≤ _j_ ≤ _n_ and in the range from _i_-th to _j_-th element inclusive, there are at least _k_ elements.
+The rest _m_ lines contain queries in the format "_i j k_". It is guaranteed that the queries are correct, i.e. 1 ≤ _i_ ≤ _j_ ≤ _n_, and in the range from _i_-th to _j_-th element inclusive there are at least _k_ elements.
 
 ### Output
 
@@ -140,7 +140,7 @@ Input: standard input
 
 Output: standard output
 
-The next day after the party, Gregory decided to give blow his children minds. He took a lot of cards and wrote on each of them one Latin letter in lowercase. After that, he came up with some string and gave the children a task to make as many substrings of that string as possible using cards. Gregory's string consists only of letters of the Latin alphabet in lowercase. You need to determine how many of its substrings can be composed using only the given cards.
+The next day after the party, Gregory decided to blow his children's minds. He took a lot of cards and wrote a lowercase Latin letter on each of them. After that, he came up with a string and gave the children a task to make as many substrings of that string as possible using cards. Gregory's string consists only of letters of the Latin alphabet in lowercase. You need to determine how many of its substrings can be composed using only the given cards.
 
 Let's write down the letters written on the cards, one after the other. Let Gregory's string be "aaab" and the cards "aba". Then we can make three "a" substrings, one "b", two "aa", one "ab", and one "aab". The substrings "aaa" and "aaab" are not allowed, since there are only two cards with the letter "a".
 
