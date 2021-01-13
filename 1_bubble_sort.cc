@@ -32,6 +32,7 @@ int main() {
 
   // Print values:
   for (const auto& x : v) std::cout << x << " ";
+  std::cout << "\n";
 
   return 0;
 }
