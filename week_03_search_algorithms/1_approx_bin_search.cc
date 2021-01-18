@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 
 template <typename T>
-T approx_bin_search(const std::vector<T>& v, T target) {
+T ApproxBinSearch(const std::vector<T>& v, T target) {
   uint32_t left = 0;
   uint32_t right = v.size() - 1;
 
@@ -19,18 +19,21 @@ T approx_bin_search(const std::vector<T>& v, T target) {
 }
 
 int main() {
+  std::iostream::sync_with_stdio(false);
+  std::cin.tie(nullptr);
+
   uint32_t n, k;
-  scanf("%u %u", &n, &k);
+  std::cin >> n >> k;
 
   // Read values:
   std::vector<int64_t> v_sorted(n), queries(k);
-  for (size_t i = 0; i < n; ++i) scanf("%lld", &v_sorted[i]);
+  for (size_t i = 0; i < n; ++i) std::cin >> v_sorted[i];
 
-  for (size_t i = 0; i < k; ++i) scanf("%lld", &queries[i]);
+  for (size_t i = 0; i < k; ++i) std::cin >> queries[i];
 
   // Print results:
   for (size_t i = 0; i < k; ++i)
-    printf("%lld\n", approx_bin_search(v_sorted, queries[i]));
+    std::cout << ApproxBinSearch(v_sorted, queries[i]) << "\n";
 
   return 0;
 }
