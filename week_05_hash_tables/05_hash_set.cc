@@ -1,109 +1,88 @@
 #include <bits/stdc++.h>
-
-#define CONST_A 31
-#define PRIME_P size_t(1e9 + 7)
-#define INIT_SIZE 2
-
-size_t hash(const std::string& key, const size_t& m) {
-  size_t result = 0;
-  for (const auto& ch : key) result = (CONST_A * result + ch) % PRIME_P;
-  return result % m;
+ 
+ 
+#define A 2
+#define P size_t(1e9 + 7)
+#define M size_t(2e6)
+ 
+ 
+size_t mod(const int64_t& a, const size_t& b) {
+    int64_t r = a % b;
+    if (r < 0) r += b;
+    return r;
 }
-
+ 
+ 
+size_t hash(const int64_t& key) {
+    return mod(A * key, P) % M;
+}
+ 
+ 
 class Set {
-  struct Item {
-    Item() : key(""), empty(true) {}
-    std::string key;
-    bool empty;
-  };
-
+    struct Item {
+        Item(): key(0), deleted(true), empty(true) {}
+        int64_t key;
+        bool deleted;
+        bool empty;
+    };
+ 
  public:
-  Set() : m(INIT_SIZE), size(0), set(new Item[INIT_SIZE]) {}
-
-  void _insert(const std::string& key) {
-    if (size + 1 > m / 2) rehash();
-
-    size_t i = hash(key, m);
-
-    while (!set[i].empty) {
-      if (!set[i].empty && set[i].key == key) return;
-      i = (i + 1) % m;
-    }
-    ++size;
-    set[i].key = key;
-    set[i].empty = false;
-  }
-
-  bool _exists(const std::string& key) {
-    size_t i = hash(key, m);
-    while (!set[i].empty) {
-      if (set[i].key == key) return true;
-      i = (i + 1) % m;
-    }
-
-    return false;
-  }
-
-  void _delete(const std::string& key) {
-    size_t i = hash(key, m);
-    bool deleted = false;
-    while (!set[i].empty) {
-      if (set[i].key == key) {
-        set[i].empty = true;
-        deleted = true;
-        size_t j = (i + 1) % m;
-        while (!set[j].empty) {
-          if (hash(set[j].key, m) <= i) {
-            std::swap(set[i], set[j]);
-            i = j;
-            break;
-          }
-          j = (j + 1) & m;
+    void _insert(const int64_t& key) {
+        size_t i = hash(key);
+        while (!set[i].empty && !set[i].deleted) {
+            if (set[i].key == key)
+                return;
+            i = (i + 1) % M;
         }
-      }
-      i = (i + 1) % m;
+        set[i].key = key;
+        set[i].deleted = false;
+        set[i].empty = false;
     }
-    if (deleted) --size;
-  }
-
-  void rehash() {
-    m *= 2;
-    Item* newSet = new Item[m];
-    size_t j;
-    for (size_t i = 0; i < m / 2; ++i)
-      if (!set[i].empty) {
-        j = hash(set[i].key, m);
-        while (!newSet[j].empty) j = (j + 1) % m;
-        newSet[j].key = set[i].key;
-        newSet[j].empty = false;
-      }
-    delete[] set;
-    set = newSet;
-  }
-
+ 
+    bool _exists(const int64_t& key) {
+        size_t i = hash(key);
+        while (!set[i].empty) {
+            if (set[i].key == key)
+                return !set[i].deleted;
+            i = (i + 1) % M;
+        }
+ 
+        return false;
+    }
+ 
+    void _delete(const int64_t& key) {
+        size_t i = hash(key);
+        while (!set[i].empty) {
+            if (set[i].key == key) {
+                set[i].deleted = true;
+                return;
+            }
+            i = (i + 1) % M;
+        }
+    }
+ 
  private:
-  Item* set;
-  size_t size, m;
+    std::array<Item, M> set;
 };
-
+ 
+ 
 int main() {
-  // std::ios::sync_with_stdio(false);
-  // std::cin.tie(0);
-
-  Set set;
-
-  std::string s;
-  int64_t key;
-  while (std::cin >> s >> key) {
-    if (s == "insert") {
-      set._insert(std::to_string(key));
-    } else if (s == "exists") {
-      (set._exists(std::to_string(key))) ? std::cout << "true\n"
-                                         : std::cout << "false\n";
-    } else if (s == "delete") {
-      set._delete(std::to_string(key));
+    std::ios::sync_with_stdio(false);
+    std::cin.tie(0);
+ 
+    Set set;
+ 
+    std::string s;
+    int64_t key;
+    while (std::cin >> s >> key) {
+        if (s == "insert") {
+            set._insert(key);
+        } else if (s == "exists") {
+            set._exists(key) ? std::cout << "true\n" : std::cout << "false\n";
+        } else if (s == "delete") {
+            set._delete(key);
+        }
     }
-  }
-
-  return 0;
+ 
+    return 0;
 }
